@@ -1,40 +1,452 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
 
-		<title>reveal.js</title>
+    <title>reveal.js</title>
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/black.css" />
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+    <style>
+      .selection {
+        display: inline-block;
+        width: 40px;
+        margin-right: 5px;
+        font-weight: bold;
+        text-align: center;
+        color: black;
+        background-color: azure;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1 style="color: gold">Regular Expressions</h1>
+        </section>
+        <section>
+          Regular expressions are a way to describe patterns in a string data
+        </section>
+        <section>
+          <p>
+            Regular expressions allow you to check a string of characters like
+            an e-mail address or password for patterns, to see so if they match
+            the pattern defined by that regular expression and produce
+            actionable information.
+          </p>
+        </section>
+        <section>
+          <section>
+            <p>
+              A regular expression (also “regexp”, or just “reg”) consists of a
+              pattern and optional flags.
+            </p>
+            <p>
+              There are two syntaxes that can be used to create a regular
+              expression object.
+            </p>
+          </section>
+          <section>
+            <p>The “long” syntax:</p>
+            <pre>
+              <code class="hljs">
+        const regexp = new RegExp("pattern", "flags");
+              </code>
+            </pre>
+          </section>
+          <section>
+            <p>And the “short” one, using slashes "/":</p>
+            <pre>
+              <code class="hljs">
+        const regexp = /pattern/; 
+        const regexp = /pattern/gi; 
+              </code>
+            </pre>
+          </section>
+        </section>
+        <section>
+          <h2 style="color: lawngreen">Flags</h2>
+        </section>
+        <section id="fragments">
+          <p>There are only 6 of them in JavaScript:</p>
+          <ol style="font-size: 24px">
+            <li style="margin-bottom: 10px">
+              <span class="fragment selection"> i </span>
+              <span class="fragment">
+                With this flag the search is case-insensitive: no difference
+                between "A" and "a"
+              </span>
+            </li>
+            <li style="margin-bottom: 10px">
+              <span class="fragment selection"> g </span>
+              <span class="fragment">
+                With this flag the search looks for all matches, without it –
+                only the first match is returned.
+              </span>
+            </li>
+            <li style="margin-bottom: 10px">
+              <span class="fragment selection"> m </span>
+              <span class="fragment"> Multiline mode </span>
+            </li>
+            <li style="margin-bottom: 10px">
+              <span class="fragment selection"> s </span>
+              <span class="fragment">
+                Enables “dotall” mode, that allows a dot "." to match newline
+                character "\n"
+              </span>
+            </li>
+            <li style="margin-bottom: 10px">
+              <span class="fragment selection"> u </span>
+              <span class="fragment">
+                Enables full Unicode support. The selection enables correct
+                processing of surrogate pairs.
+              </span>
+            </li>
+            <li style="margin-bottom: 10px">
+              <span class="fragment selection"> y </span>
+              <span class="fragment">
+                “Sticky” mode: searching at the exact position in the text
+              </span>
+            </li>
+          </ol>
+        </section>
+        <section>
+          <pre>
+            <code class="hljs">
+              const str = "We will, we will rock you";
+              alert( str.match(/we/g) ); // we
+            </code>
+          </pre>
+          <pre>
+            <code class="hljs">
+              const str = "We will, we will rock you";
+              alert( str.match(/we/i) ); // We
+            </code>
+          </pre>
+          <pre>
+            <code class="hljs">
+              const str = "We will, we will rock you";
+              alert( str.match(/we/gi) ); // We,we
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h2 style="color: lawngreen">Character classes</h2>
+        </section>
+        <section>
+          <p>
+            A character class is a special notation that matches any symbol from
+            a certain set.
+          </p>
+          <p>Most used are:</p>
+          <ul style="font-size: 24px">
+            <li>
+              <span class="fragment">
+                <span class="selection"> \d </span>
+                (“d” is from “digit”)
+              </span>
+              <p class="fragment">A digit: a character from 0 to 9.</p>
+            </li>
+            <li>
+              <span class="fragment">
+                <span class="selection"> \s </span>
+                (“s” is from “space”)
+              </span>
+              <p class="fragment">
+                A space symbol: includes spaces, tabs \t, newlines \n and few
+                other rare characters, such as \v, \f and \r.
+              </p>
+            </li>
+            <li>
+              <span class="fragment">
+                <span class="selection"> \w </span>
+                (“w” is from “word”)
+              </span>
+              <p class="fragment">
+                A “wordly” character: either a letter of Latin alphabet or a
+                digit or an underscore _. Non-Latin letters (like cyrillic or
+                hindi) do not belong to \w.
+              </p>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h3>Inverse classes</h3>
+          <ul style="font-size: 24px">
+            <li>
+              <span class="fragment selection"> \D </span>
+              <p class="fragment">
+                Non-digit: any character except \d, for instance a letter.
+              </p>
+            </li>
+            <li>
+              <span class="fragment selection"> \S </span>
+              <p class="fragment">
+                Non-space: any character except \s, for instance a letter.
+              </p>
+            </li>
+            <li>
+              <span class="fragment selection"> \W </span>
+              <p class="fragment">
+                Non-wordly character: anything but \w, e.g a non-latin letter or
+                a space.
+              </p>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <pre>
+            <code class="hljs">
+      const str = "tel: +375(29)-100-11-00";
+      alert( str.match(/\d/g) ); // 3,7,5,2,9,1,0,0,1,1,0,0
+            </code>
+          </pre>
+          <pre>
+            <code class="hljs">
+      const str = "tel: +375(29)-100-11-00";
+      alert( str.match(/\w/g) ); // t,e,l,3,7,5,2,9,1,0,0,1,1,0,0
+            </code>
+          </pre>
+          <pre>
+            <code class="hljs">
+      const str = "tel: +375(29)-100-11-00";
+      alert( str.match(/\D/g) ); // t,e,l,:, ,+,(,),-,-,-
+            </code>
+          </pre>
+          <pre>
+            <code class="hljs">
+      const str = "tel: +375(29)-100-11-00";
+      alert( str.match(/\W/g) ); // :, ,+,(,),-,-,-
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h2 style="color: lawngreen">Anchors</h2>
+        </section>
+        <section>
+          <p>
+            The caret <span class="selection">^</span> and dollar
+            <span class="selection">$</span> characters have special meaning in
+            a regexp. They are called “anchors”.
+          </p>
+          <p>
+            The caret <span class="selection">^</span> matches at the beginning
+            of the text, and the dollar
+            <span class="selection">$</span>
+            – at the end.
+          </p>
+        </section>
+        <section>
+          <pre>
+              <code class="hljs">
+                const str = "We will, we will rock you";
+                alert( str.match(/^we/i) ); // We
+              </code>
+            </pre>
+          <pre>
+              <code class="hljs">
+                const str = "We will, we will rock you";
+                alert( str.match(/^we/gi) ); // We
+              </code>
+            </pre>
+          <pre>
+              <code class="hljs">
+                const str = "We will, we will rock you";
+                alert( str.match(/^we/) ); // null
+              </code>
+            </pre>
+          <pre>
+              <code class="hljs">
+                const str = "We will, we will rock you";
+                alert( str.match(/You$/i) ); // you
+              </code>
+            </pre>
+          <pre>
+              <code class="hljs">
+                const str = "We will, we will rock you";
+                alert( str.match(/You$/) ); // null
+              </code>
+            </pre>
+        </section>
+        <section>
+          <h2 style="color: lawngreen">Escaping, special characters</h2>
+        </section>
+        <section>
+          <p>
+            To search for special characters [ \ ^ $ . | ? * + ( ) literally, we
+            need to prepend them with a backslash \ (“escape them”).
+          </p>
+          <pre>
+            <code class="hljs">
+        alert( "Chapter 5.1".match(/\d\.\d/) ); // 5.1
+            </code>
+          </pre>
+        </section>
+        <section>
+          <p>
+            We also need to escape / if we’re inside /.../ (but not inside new
+            RegExp).
+          </p>
+          <pre>
+            <code class="hljs">
+              alert( "1/2".match(/\d\/\d/g) ); // 1/2
+            </code>
+          </pre>
+        </section>
+        <section>
+          <p>
+            When passing a string to new RegExp, we need to double backslashes
+            \\, cause string quotes consume one of them.
+          </p>
+        </section>
+        <section>
+          <h2 style="color: lawngreen">Sets and ranges [...]</h2>
+          <p>
+            Several characters or character classes inside square brackets […]
+            mean to “search for any character among given”.
+          </p>
+        </section>
+        <section>
+          <h3>Sets</h3>
+          <p>
+            For instance, [abc] means any of the 3 characters: 'a', 'b', or 'c'.
+          </p>
+          <p>That’s called a set.</p>
+          <pre>
+            <code class="hljs">
+        // find [t or m], and then "op"
+        alert( "Mop top".match(/[tm]op/gi) ); // "Mop", "top"
+            </code>
+          </pre>
+          <pre>
+            <code class="hljs">
+        // find "V", then [o or i], then "la"
+        alert( "Voila".match(/V[oi]la/) ); // null
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h3>Ranges</h3>
+          <p>Square brackets may also contain character ranges.</p>
+          <p>
+            For instance, [a-z] is a character in range from a to z, and [0-5]
+            is a digit from 0 to 5.
+          </p>
+          <pre>
+            <code class="hljs">
+        alert('1234567'.match(/[0-5]/g)); // 1,2,3,4,5
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h2 style="color: lawngreen">Quantifiers +, *, ? and {n}</h2>
+        </section>
+        <section>
+          <h3>Quantity {n}</h3>
+          <p>The simplest quantifier is a number in curly braces: {n}.</p>
+          <p>
+            A quantifier is appended to a character (or a character class, or a
+            [...] set etc) and specifies how many we need.
+          </p>
+        </section>
+        <section>
+          <p>Quantity {n} has a few advanced forms, let’s see examples:</p>
+          <ul style="font-size: 24px">
+            <li>
+              <p>The exact count: {5}</p>
+              <p>\d{5} denotes exactly 5 digits, the same as \d\d\d\d\d.</p>
+              <pre>
+                <code class="hljs">
+        alert( "I'm 12345 years old".match(/\d{5}/) ); //  "12345"
+                </code>
+              </pre>
+            </li>
+            <li>
+              <p>The range: {3,5}, match 3-5 times</p>
+              <p>
+                To find numbers from 3 to 5 digits we can put the limits into
+                curly braces: \d{3,5}
+              </p>
+              <pre>
+                <code class="hljs">
+        alert( "I'm not 12, but 1234 years old".match(/\d{3,5}/) ); // "1234"
+                </code>
+              </pre>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h3>Shorthands</h3>
+          <p>There are shorthands for most used quantifiers:</p>
+          <ul style="font-size: 24px">
+            <li>
+              <p>
+                <span class="selection">+</span>
+                Means “one or more”, the same as {1,}.
+              </p>
+              <pre>
+                <code class="hljs">
+        const str = "+7(903)-123-45-67";
+        alert( str.match(/\d+/g) ); // 7,903,123,45,67
+                </code>
+              </pre>
+            </li>
+            <li>
+              <p>
+                <span class="selection">?</span>
+                Means “zero or one”, the same as {0,1}. In other words, it makes
+                the symbol optional.
+              </p>
+              <pre>
+                <code class="hljs">
+        const str = "Should I write color or colour?";
+        alert( str.match(/colou?r/g) ); // color, colour
+                </code>
+              </pre>
+            </li>
+            <li>
+              <p>
+                <span class="selection">*</span>
+                Means “zero or more”, the same as {0,}. That is, the character
+                may repeat any times or be absent.
+              </p>
+              <pre>
+                <code class="hljs">
+        alert( "100 10 1".match(/\d0*/g) ); // 100, 10, 1
+                </code>
+              </pre>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>Thanks for watching</h2>
+        </section>
+      </div>
+    </div>
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
 </html>
